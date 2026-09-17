@@ -1,0 +1,17 @@
+{
+  "name": "liveroom-android-wrapper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Capacitor wrapper that packages Mobile/app (the existing web shell) as an installable Android APK for testing. Does not change any Backend or Mobile web code.",
+  "scripts": {
+    "cap:sync": "npx cap sync android",
+    "android:open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.2"
+  }
+}

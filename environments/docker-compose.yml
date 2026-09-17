@@ -1,0 +1,94 @@
+# Spins up three fully isolated stacks (separate containers, networks,
+# volumes and ports) so Development / Staging / Production never share state.
+# Usage:
+#   docker compose --profile development up -d
+#   docker compose --profile staging up -d
+#   docker compose --profile production up -d
+#
+# A fourth profile, "ci-smoke", exists ONLY for automated CI validation
+# (see .github/workflows/backend-ci.yml). It builds the same image and uses
+# the same STAGE3_ENABLE_POSTGRES=true / LOG_LEVEL=info settings as real
+# Staging, but points at a throwaway, CI-local Postgres container instead
+# of a real external staging database — it needs zero cloud credentials,
+# and it is NOT a substitute for a real, persistently-reachable Staging
+# host (that still requires a real cloud provider + STAGING_DEPLOY_HOST /
+# STAGING_DEPLOY_SSH_KEY secrets — see the completion report).
+
+services:
+  backend-development:
+    build: ../Backend
+    profiles: ["development"]
+    env_file: ./development.env
+    ports:
+      - "3001:3000"
+    depends_on: [postgres-development]
+    networks: [dev-net]
+
+  postgres-development:
+    image: postgres:17-alpine
+    profiles: ["development"]
+    environment:
+      POSTGRES_DB: app_dev
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_pass
+    volumes:
+      - dev-postgres-data:/var/lib/postgresql/data
+    networks: [dev-net]
+
+  backend-staging:
+    build: ../Backend
+    profiles: ["staging"]
+    env_file: ./staging.env
+    ports:
+      - "3002:3000"
+    networks: [staging-net]
+
+  backend-production:
+    build: ../Backend
+    profiles: ["production"]
+    env_file: ./production.env
+    ports:
+      - "3003:3000"
+    networks: [prod-net]
+
+  # CI-only smoke test target — see the profile comment above.
+  backend-ci-smoke:
+    build: ../Backend
+    profiles: ["ci-smoke"]
+    env_file: ./staging.env
+    environment:
+      # Overrides staging.env's placeholder DATABASE_URL (which points at
+      # a real external host that does not exist here) with the throwaway
+      # container below. Everything else — NODE_ENV, LOG_LEVEL,
+      # STAGE3_ENABLE_POSTGRES — stays identical to real Staging.
+      DATABASE_URL: postgres://ci_user:ci_pass@postgres-ci-smoke:5432/app_ci_smoke
+    ports:
+      - "3009:3000"
+    depends_on:
+      postgres-ci-smoke:
+        condition: service_healthy
+    networks: [ci-smoke-net]
+
+  postgres-ci-smoke:
+    image: postgres:17-alpine
+    profiles: ["ci-smoke"]
+    environment:
+      POSTGRES_DB: app_ci_smoke
+      POSTGRES_USER: ci_user
+      POSTGRES_PASSWORD: ci_pass
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ci_user -d app_ci_smoke"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+    networks: [ci-smoke-net]
+
+volumes:
+  dev-postgres-data:
+
+networks:
+  dev-net:
+  staging-net:
+  prod-net:
+  ci-smoke-net:
+

@@ -1,0 +1,28 @@
+{
+  "name": "backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Stage 1 minimal backend instance \u2014 health check + centralized logging",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "NODE_ENV=development node src/index.js",
+    "test": "node --test test/*.test.js",
+    "build": "bash scripts/build-check.sh",
+    "migrate": "node src/database/migrations/migrate.js",
+    "demo:account": "node scripts/create-demo-account.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pino": "^9.3.2",
+    "pino-http": "^10.2.0",
+    "pg": "^8.12.0",
+    "agora-token": "^2.0.5"
+  },
+  "devDependencies": {
+    "pino-pretty": "^11.2.2"
+  }
+}

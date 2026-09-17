@@ -1,0 +1,17 @@
+{
+  "defaultLanguage": "ar",
+  "languages": [
+    {
+      "code": "ar",
+      "name": "العربية",
+      "englishName": "Arabic",
+      "direction": "rtl"
+    },
+    {
+      "code": "en",
+      "name": "English",
+      "englishName": "English",
+      "direction": "ltr"
+    }
+  ]
+}

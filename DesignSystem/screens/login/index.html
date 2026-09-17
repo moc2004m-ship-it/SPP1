@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Design System Demo</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css" />
+  <link rel="stylesheet" href="../../components/base.css" />
+  <style>
+    .login-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: var(--space-8);
+    }
+    .login-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background: var(--color-primary);
+      color: var(--color-text-on-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-inline: auto;
+      margin-block-end: var(--space-5);
+    }
+    .row-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+    .status-line {
+      min-height: 20px;
+      font-size: var(--font-size-sm);
+      color: var(--color-success);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="ds-screen">
+    <ds-app-bar id="app-bar" title="تسجيل الدخول" back></ds-app-bar>
+
+    <div class="ds-toolbar-row">
+      <button class="ds-demo-toggle" id="theme-toggle" type="button">Dark / Light</button>
+      <button class="ds-demo-toggle" id="dir-toggle" type="button">RTL / LTR</button>
+    </div>
+
+    <main class="login-body">
+      <div class="ds-container">
+        <ds-card padding="lg" elevation="md">
+          <div class="login-logo"><ds-icon name="logo" size="28"></ds-icon></div>
+          <div class="ds-stack" style="margin-block-end: var(--space-6); text-align:center;">
+            <h1 class="ds-text-title">مرحبًا بعودتك</h1>
+            <p class="ds-text-body">سجّل الدخول للمتابعة</p>
+          </div>
+
+          <form id="login-form" class="ds-stack" novalidate>
+            <ds-text-field
+              id="email"
+              label="البريد الإلكتروني"
+              type="email"
+              icon="mail"
+              placeholder="you@example.com"
+              name="email"
+              required
+            ></ds-text-field>
+
+            <ds-text-field
+              id="password"
+              label="كلمة المرور"
+              type="password"
+              icon="lock"
+              placeholder="••••••••"
+              name="password"
+              required
+            ></ds-text-field>
+
+            <div class="row-between">
+              <ds-checkbox id="remember" label="تذكرني"></ds-checkbox>
+              <ds-button variant="ghost" size="sm" type="button" id="forgot-btn">نسيت كلمة المرور؟</ds-button>
+            </div>
+
+            <ds-button id="submit-btn" variant="primary" full-width>تسجيل الدخول</ds-button>
+            <p class="status-line" id="status-line"></p>
+          </form>
+        </ds-card>
+      </div>
+    </main>
+  </div>
+
+  <ds-dialog id="forgot-dialog" title="استعادة كلمة المرور" variant="sheet">
+    <div class="ds-stack">
+      <p class="ds-text-body">أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين.</p>
+      <ds-text-field id="reset-email" label="البريد الإلكتروني" type="email" icon="mail" placeholder="you@example.com"></ds-text-field>
+      <ds-button id="reset-btn" variant="primary" full-width>إرسال الرابط</ds-button>
+    </div>
+  </ds-dialog>
+
+  <script type="module">
+    import { initTheme, toggleTheme, toggleDirection } from "../../theme/theme.js";
+    import "../../icons/ds-icon.js";
+    import "../../components/button.js";
+    import "../../components/text-field.js";
+    import "../../components/checkbox.js";
+    import "../../components/card.js";
+    import "../../components/app-bar.js";
+    import "../../components/dialog.js";
+    import "../../components/loading.js";
+
+    initTheme();
+
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+    document.getElementById("dir-toggle").addEventListener("click", toggleDirection);
+
+    // Demo-only wiring: real navigation/auth is a Stage 3+ concern (see
+    // ../../STAGE2_TODO.md). This screen only proves the components work
+    // together end-to-end with real interactive states.
+    document.getElementById("app-bar").addEventListener("ds-back", () => {
+      window.location.href = "../splash/index.html";
+    });
+
+    const form = document.getElementById("login-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const statusLine = document.getElementById("status-line");
+    const emailField = document.getElementById("email");
+    const passwordField = document.getElementById("password");
+
+    form.addEventListener("submit", (e) => e.preventDefault());
+
+    submitBtn.addEventListener("click", () => {
+      let hasError = false;
+      if (!emailField.value.includes("@")) {
+        emailField.setAttribute("error", "");
+        emailField.setAttribute("error-text", "أدخل بريدًا إلكترونيًا صحيحًا");
+        hasError = true;
+      } else {
+        emailField.removeAttribute("error");
+      }
+      if (!passwordField.value || passwordField.value.length < 4) {
+        passwordField.setAttribute("error", "");
+        passwordField.setAttribute("error-text", "كلمة المرور قصيرة جدًا");
+        hasError = true;
+      } else {
+        passwordField.removeAttribute("error");
+      }
+      if (hasError) return;
+
+      submitBtn.setAttribute("loading", "");
+      statusLine.textContent = "";
+      setTimeout(() => {
+        submitBtn.removeAttribute("loading");
+        statusLine.textContent = "تم تسجيل الدخول (محاكاة تجريبية فقط) ✓";
+      }, 1400);
+    });
+
+    document.getElementById("forgot-btn").addEventListener("click", () => {
+      document.getElementById("forgot-dialog").setAttribute("open", "");
+    });
+    document.getElementById("forgot-dialog").addEventListener("ds-close", () => {
+      document.getElementById("forgot-dialog").removeAttribute("open");
+    });
+    document.getElementById("reset-btn").addEventListener("click", () => {
+      document.getElementById("forgot-dialog").removeAttribute("open");
+    });
+  </script>
+</body>
+</html>

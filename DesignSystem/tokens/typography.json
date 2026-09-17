@@ -1,0 +1,28 @@
+{
+  "fontFamily": {
+    "base": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans Arabic', 'Noto Kufi Arabic', sans-serif"
+  },
+  "fontSize": {
+    "xs": 12,
+    "sm": 14,
+    "md": 16,
+    "lg": 18,
+    "xl": 22,
+    "xxl": 28
+  },
+  "fontWeight": {
+    "regular": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700
+  },
+  "lineHeight": {
+    "tight": 1.2,
+    "normal": 1.5,
+    "relaxed": 1.7
+  },
+  "notes": [
+    "No custom font files are bundled on purpose — the base stack uses only system fonts already present on every OS, so the app needs zero font downloads and works fully offline.",
+    "'Noto Sans Arabic' / 'Noto Kufi Arabic' are listed as fallbacks for systems that have them; if a specific Arabic webfont is chosen later, add its file under a new Assets/fonts/ folder and register it in tokens.css — this is a placeholder-ready extension point, not a blocker."
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "_note": "Development/fallback config only — not production data. See Config/CONFIG_DESIGN.md.",
+  "configVersion": 1,
+  "app": {
+    "nameKey": "app.name",
+    "environmentLabel": "development"
+  },
+  "languages": {
+    "supported": ["ar", "en"],
+    "default": "ar"
+  },
+  "maintenance": {
+    "enabled": false,
+    "messageKey": "splash.maintenance.body"
+  },
+  "version": {
+    "minimumSupported": "1.0.0",
+    "latestRecommended": "1.0.0"
+  },
+  "featureFlags": {
+    "onboardingEnabled": true
+  },
+  "onboarding": {
+    "skipEnabled": true,
+    "slides": [
+      { "id": "slide1", "icon": "logo", "titleKey": "onboarding.slide1.title", "bodyKey": "onboarding.slide1.body" },
+      { "id": "slide2", "icon": "check", "titleKey": "onboarding.slide2.title", "bodyKey": "onboarding.slide2.body" },
+      { "id": "slide3", "icon": "chevron", "titleKey": "onboarding.slide3.title", "bodyKey": "onboarding.slide3.body" }
+    ]
+  }
+}

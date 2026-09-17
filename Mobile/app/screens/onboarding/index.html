@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onboarding — Stage 4</title>
+  <link rel="stylesheet" href="../../../../DesignSystem/tokens/tokens.css" />
+  <link rel="stylesheet" href="../../../../DesignSystem/components/base.css" />
+  <style>
+    .onboarding-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: var(--space-8);
+    }
+    .step-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-xl);
+      background: var(--color-primary);
+      color: var(--color-text-on-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-inline: auto;
+      margin-block-end: var(--space-5);
+    }
+    .dots {
+      display: flex;
+      gap: var(--space-2);
+      justify-content: center;
+      margin-block-end: var(--space-5);
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radius-full);
+      background: var(--color-border);
+    }
+    .dot[data-active="true"] {
+      background: var(--color-primary);
+    }
+    .lang-options {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-block-start: var(--space-6);
+    }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="ds-screen">
+    <div class="ds-toolbar-row">
+      <button class="ds-demo-toggle" id="theme-toggle" type="button">Dark / Light</button>
+      <button class="ds-demo-toggle" id="dir-toggle" type="button">RTL / LTR</button>
+    </div>
+
+    <main class="onboarding-body">
+      <div class="ds-container">
+        <ds-card padding="lg" elevation="md">
+
+          <!-- Step 0: language selection -->
+          <section id="step-language">
+            <div class="step-icon"><ds-icon name="logo" size="32"></ds-icon></div>
+            <div class="ds-stack" style="text-align:center; margin-block-end: var(--space-6);">
+              <h1 class="ds-text-title" id="lang-title">…</h1>
+              <p class="ds-text-body" id="lang-body">…</p>
+            </div>
+            <div class="lang-options" id="lang-options"></div>
+          </section>
+
+          <!-- Step 1+: content slides (rendered dynamically from Config) -->
+          <section id="step-slide" hidden>
+            <div class="dots" id="dots"></div>
+            <div class="step-icon"><ds-icon id="slide-icon" name="logo" size="32"></ds-icon></div>
+            <div class="ds-stack" style="text-align:center;">
+              <h1 class="ds-text-title" id="slide-title">…</h1>
+              <p class="ds-text-body" id="slide-body">…</p>
+            </div>
+          </section>
+
+          <div class="footer-row">
+            <ds-button id="skip-btn" variant="ghost" size="sm" hidden>…</ds-button>
+            <ds-button id="continue-btn" variant="primary">…</ds-button>
+          </div>
+        </ds-card>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./onboarding.js"></script>
+</body>
+</html>

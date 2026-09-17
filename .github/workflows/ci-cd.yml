@@ -1,0 +1,29 @@
+name: CI/CD
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: Backend/.nvmrc
+      - name: Install backend dependencies
+        working-directory: Backend
+        run: npm install
+      - name: Backend build
+        working-directory: Backend
+        run: npm run build
+      - name: Backend tests
+        working-directory: Backend
+        run: npm test
+      - name: Deploy to staging
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          echo "Staging deployment hook reached."
+          echo "Replace this step with the authenticated command for the selected Cloud provider."
+          echo "No fake deployment is claimed by this repository."

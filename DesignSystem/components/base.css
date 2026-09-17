@@ -1,0 +1,76 @@
+/* base.css — shared, non-component-specific styles. Everything here must
+   reference tokens.css variables — no hardcoded colors/spacing/radii. */
+
+.ds-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.ds-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+.ds-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ds-container {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+  padding-inline: var(--space-5);
+}
+
+.ds-text-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  margin: 0;
+}
+
+.ds-text-body {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.ds-text-caption {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.ds-toolbar-row {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+/* Small text-only utility buttons used for the RTL/Theme demo toggles on
+   the screens — not part of the core component set, just wiring the demo. */
+.ds-demo-toggle {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+}
+
+.ds-demo-toggle:active {
+  background: var(--color-surface-alt);
+}

@@ -1,0 +1,29 @@
+{
+  "app.name": "App Name",
+
+  "splash.tagline": "One moment, getting things ready…",
+  "splash.error.title": "Couldn't load settings",
+  "splash.error.body": "Something went wrong while preparing the app. You can try again.",
+  "splash.offline.title": "You're offline",
+  "splash.offline.body": "The app will use the saved local settings for now.",
+  "splash.maintenance.title": "Under maintenance",
+  "splash.maintenance.body": "We're improving the app right now, please check back soon.",
+  "splash.retry": "Retry",
+
+  "onboarding.language.title": "Choose your language",
+  "onboarding.language.body": "You can change the language later from settings",
+  "onboarding.skip": "Skip",
+  "onboarding.continue": "Continue",
+  "onboarding.getStarted": "Get started",
+  "onboarding.stepLabel": "Step {current} of {total}",
+
+  "onboarding.slide1.title": "Welcome",
+  "onboarding.slide1.body": "This app helps you get things done quickly and easily.",
+  "onboarding.slide2.title": "Everything in one place",
+  "onboarding.slide2.body": "Keep track of what matters from one simple screen.",
+  "onboarding.slide3.title": "Ready to go",
+  "onboarding.slide3.body": "Create your account and start using the app now.",
+
+  "common.retry": "Retry",
+  "common.close": "Close"
+}

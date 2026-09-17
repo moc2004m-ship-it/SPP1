@@ -1,0 +1,46 @@
+name: Build Android APK (Capacitor wrapper, debug/testing)
+
+# Manual trigger only -- this wraps the existing Mobile/app web shell
+# (Mobile/app/index.html, app.js, app.css) into an installable Android
+# APK via Capacitor. It does NOT change any Backend or Mobile web code.
+# The APK is a thin WebView shell that loads whatever URL is set in
+# capacitor.config.json's server.url -- edit that file first (see
+# APK_BUILD_README.md) before running this workflow.
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Capacitor deps
+        run: npm install
+
+      - name: Add Android platform
+        run: npx cap add android
+
+      - name: Sync web assets into the Android project
+        run: npx cap sync android
+
+      - name: Build debug APK
+        working-directory: android
+        run: |
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: liveroom-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk

@@ -1,0 +1,32 @@
+{
+  "light": {
+    "background": "#FFFFFF",
+    "surface": "#F5F6F8",
+    "surfaceAlt": "#ECEDF1",
+    "border": "#DADDE3",
+    "textPrimary": "#14161A",
+    "textSecondary": "#5A5F6B",
+    "textOnPrimary": "#FFFFFF",
+    "primary": "#2F6FED",
+    "primaryPressed": "#2557BE",
+    "primaryDisabled": "#A9C3F5",
+    "danger": "#E5484D",
+    "success": "#2FAE60",
+    "focusRing": "#94B8FA"
+  },
+  "dark": {
+    "background": "#0F1115",
+    "surface": "#191C22",
+    "surfaceAlt": "#22262E",
+    "border": "#2E323C",
+    "textPrimary": "#F2F3F5",
+    "textSecondary": "#A7ACB8",
+    "textOnPrimary": "#0F1115",
+    "primary": "#5B8DEF",
+    "primaryPressed": "#7CA3F2",
+    "primaryDisabled": "#33425E",
+    "danger": "#FF6B70",
+    "success": "#4CC988",
+    "focusRing": "#5B8DEF"
+  }
+}

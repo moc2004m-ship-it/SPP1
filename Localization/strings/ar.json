@@ -1,0 +1,29 @@
+{
+  "app.name": "اسم التطبيق",
+
+  "splash.tagline": "لحظة واحدة، جاري التجهيز…",
+  "splash.error.title": "تعذّر تحميل الإعدادات",
+  "splash.error.body": "حدث خطأ غير متوقع أثناء التجهيز. يمكنك إعادة المحاولة.",
+  "splash.offline.title": "لا يوجد اتصال بالإنترنت",
+  "splash.offline.body": "سيتم استخدام الإعدادات المحلية المحفوظة مؤقتًا.",
+  "splash.maintenance.title": "التطبيق تحت الصيانة",
+  "splash.maintenance.body": "نعمل على تحسين التطبيق حاليًا، الرجاء المحاولة لاحقًا.",
+  "splash.retry": "إعادة المحاولة",
+
+  "onboarding.language.title": "اختر لغتك",
+  "onboarding.language.body": "يمكنك تغيير اللغة لاحقًا من الإعدادات",
+  "onboarding.skip": "تخطي",
+  "onboarding.continue": "متابعة",
+  "onboarding.getStarted": "ابدأ الآن",
+  "onboarding.stepLabel": "الخطوة {current} من {total}",
+
+  "onboarding.slide1.title": "أهلًا بك",
+  "onboarding.slide1.body": "هذا التطبيق يساعدك على إنجاز مهامك بسهولة وسرعة.",
+  "onboarding.slide2.title": "كل شيء في مكان واحد",
+  "onboarding.slide2.body": "تابع كل ما يهمك من شاشة واحدة بسيطة وواضحة.",
+  "onboarding.slide3.title": "جاهز للانطلاق",
+  "onboarding.slide3.body": "أنشئ حسابك وابدأ الاستخدام الآن.",
+
+  "common.retry": "إعادة المحاولة",
+  "common.close": "إغلاق"
+}

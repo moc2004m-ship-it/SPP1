@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splash — Design System Demo</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css" />
+  <link rel="stylesheet" href="../../components/base.css" />
+  <style>
+    .splash-logo {
+      width: 96px;
+      height: 96px;
+      border-radius: var(--radius-xl);
+      background: var(--color-primary);
+      color: var(--color-text-on-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .splash-center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-6);
+      text-align: center;
+    }
+    .splash-brand { margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="ds-screen">
+    <div class="ds-toolbar-row">
+      <button class="ds-demo-toggle" id="theme-toggle" type="button">Dark / Light</button>
+      <button class="ds-demo-toggle" id="dir-toggle" type="button">RTL / LTR</button>
+    </div>
+
+    <main class="splash-center">
+      <div class="splash-logo">
+        <ds-icon name="logo" size="48"></ds-icon>
+      </div>
+      <div class="ds-stack" style="align-items:center;">
+        <h1 class="ds-text-title splash-brand">اسم التطبيق</h1>
+        <p class="ds-text-body">لحظة واحدة، جاري التجهيز…</p>
+      </div>
+      <ds-loading-overlay id="loader"></ds-loading-overlay>
+    </main>
+  </div>
+
+  <script type="module">
+    import { initTheme, toggleTheme, toggleDirection } from "../../theme/theme.js";
+    import "../../icons/ds-icon.js";
+    import "../../components/loading.js";
+
+    initTheme();
+
+    document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
+    document.getElementById("dir-toggle").addEventListener("click", toggleDirection);
+
+    // Demo-only: simulate the Splash -> Login hand-off after loading
+    // finishes. Real navigation/routing belongs to a later stage (see
+    // ../../STAGE2_TODO.md) — this file only proves the Design System
+    // renders a genuine, working Splash screen on its own.
+    setTimeout(() => {
+      window.location.href = "../login/index.html";
+    }, 1600);
+  </script>
+</body>
+</html>
